@@ -31,6 +31,7 @@ ALLOWED_HOSTS: List[str] = config(
     default="",
 )
 
+
 # logging configuration
 
 LOGGING_LEVEL = logging.DEBUG if DEBUG else logging.INFO
