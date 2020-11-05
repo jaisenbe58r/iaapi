@@ -19,6 +19,8 @@ jobs:
         run: pip install poetry==1.0
       - name: Install setuptools
         run: pip install setuptools
+      - name: Prepare
+        run: python -m pip install conan
       - uses: actions/cache@v1
         id: cache-dev-deps
         with:
