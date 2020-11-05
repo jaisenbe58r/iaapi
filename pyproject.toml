@@ -1,0 +1,74 @@
+[tool.poetry]
+name = "iaapi"
+version = "0.0.0"
+description = "iAApi: API for Data scientist"
+authors = ["Jaime Sendra Berenguer <jaimesendraberenguer@gmail.com>"]
+maintainers = ["Jaime Sendra Berenguer <jaimesendraberenguer@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+homepage = ""
+repository = ""
+documentation = ""
+keywords = [
+    "API",
+    "FastAPI",
+    "Machine Learning",
+    "Deep Learning",
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+uvicorn = "^0.11.8"
+fastapi = "^0.61.1"
+pydantic = { version = "^1.6", extras = ["email"] }
+passlib = { version = "^1.7", extras = ["bcrypt"] }
+pyjwt = "^1.7"
+asyncpg = "^0.21.0"
+aiosql = "^3.1.2"
+pypika = "^0.38.0"
+alembic = "^1.4"
+databases = { version = "^0.3.2", extras = ["postgresql", "mysql"]}
+python-slugify = "^4.0"
+Unidecode = "^1.1"
+loguru = "^0.5.1"
+
+[tool.poetry.dev-dependencies]
+black = "^20.8b1"
+isort = "^5.0"
+autoflake = "^1.4"
+wemake-python-styleguide = { git = "https://github.com/wemake-services/wemake-python-styleguide", rev = "a787ee1" }
+mypy = "^0.782"
+flake8-fixme = "^1.1"
+pytest = "^6.0"
+pytest-cov = "^2.10"
+pytest-asyncio = "^0.14.0"
+pytest-env = "^0.6.2"
+docker = "^4.3"
+httpx = "^0.14.2"
+asgi-lifespan = "^1.0.1"
+
+[tool.isort]
+profile = "black"
+src_paths = ["app", "tests"]
+combine_as_imports = true
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+filterwarnings = "error"
+addopts = '''
+  --strict
+  --tb=short
+  --cov=app
+  --cov=tests
+  --cov-branch
+  --cov-report=term-missing
+  --cov-report=html
+  --cov-report=xml
+  --no-cov-on-fail
+  --cov-fail-under=100
+'''
+env = ["SECRET_KEY=secret"]
+
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"
