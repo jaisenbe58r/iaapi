@@ -9,7 +9,7 @@ services:
       - .env
     depends_on:
       - db
-    command: ['./docker/entrypoint.sh', "db:5432"]
+    command: ['./docker/entrypoint.sh', "db:5433"]
   db:
     image: postgres:11.5-alpine
     ports:

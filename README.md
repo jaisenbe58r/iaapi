@@ -40,7 +40,7 @@ Then run the following commands to bootstrap your environment with ``poetry``:
 
 ```
 git clone https://github.com/jaisenbe58r/iaapi
-cd fastapi-realworld-example-app
+cd iaapi/
 poetry install
 poetry shell
 ```
