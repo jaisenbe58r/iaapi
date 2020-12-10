@@ -10,6 +10,7 @@ services:
     depends_on:
       - db
     command: ['./docker/entrypoint.sh', "db:5432"]
+  
   db:
     image: postgres:11.5-alpine
     ports:
@@ -18,3 +19,17 @@ services:
       - .env
     volumes:
       - ./dbdata:/var/lib/postgresql/data:cached
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    links:
+      - postgres
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: pwdpwd
+    volumes:
+      - pgadmin:/root/.pgadmin
+    ports:
+      - "5050:80"

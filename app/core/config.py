@@ -9,10 +9,10 @@ from starlette.datastructures import CommaSeparatedStrings, Secret
 
 from app.core.logging import InterceptHandler
 
-API_PREFIX = "/api"
+API_PREFIX = "/api/v1"
 
 JWT_TOKEN_PREFIX = "Token"  # noqa: S105
-VERSION = "0.0.0"
+VERSION = "0.0.1"
 
 config = Config(".env")
 
