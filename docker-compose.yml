@@ -23,7 +23,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     links:
-      - postgres
+      - db
     depends_on:
       - db
     environment:
