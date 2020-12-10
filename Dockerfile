@@ -19,7 +19,7 @@ COPY docker/entrypoint.sh docker/entrypoint.sh
 
 COPY . ./
 
-RUN ["chmod", "+x", './docker/entrypoint.sh']
+RUN chmod +x ./docker/entrypoint.sh
 
 CMD alembic upgrade head && \
     uvicorn --host=0.0.0.0 app.main:app
