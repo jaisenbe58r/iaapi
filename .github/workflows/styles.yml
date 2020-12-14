@@ -37,6 +37,6 @@ jobs:
       - name: Run linters
         run: |
           source .venv/bin/activate
-          apt-get install flake8
+          pip install flake8
           chmod +x ./scripts/lint
           ./scripts/lint
