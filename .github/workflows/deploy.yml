@@ -36,6 +36,7 @@ jobs:
           DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
+          echo "$SSH_PRIVATE_KEY"
           which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
           eval $(ssh-agent -s)
           echo "add ssh key"
