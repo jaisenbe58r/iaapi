@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
-      - name: Build image and publish to registry
+      - name: Build docker-compose images and publish to registry
         run: |
-          docker build -t $IMAGE_NAME:latest .
+          docker-compose build -t $IMAGE_NAME:latest .
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
-          docker push $IMAGE_NAME:latest
+          docker-compose push $IMAGE_NAME:latest
 
   deploy:
     name: Deploy
@@ -43,10 +43,10 @@ jobs:
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
-            docker pull $IMAGE_NAME && \
+            docker-compose pull $IMAGE_NAME && \
             (docker rm -f frw_backend || true) && \
             docker-compose build && \
-            docker-compose up -d
+            docker-compose up -d"
 
 
 
