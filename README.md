@@ -23,6 +23,7 @@
 [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/kennethreitz)
 
 
+
 referencias = https://github.com/nsidnev/fastapi-realworld-example-app
 
 # Quickstart
