@@ -42,6 +42,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
+          docker network create web
           ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
             docker pull $IMAGE_NAME && \
             (docker rm -f frw_backend || true) && \
@@ -55,7 +56,7 @@ jobs:
               --label \"traefik.http.routers.frw-backend.entrypoints=web-secure\" \
               --label \"traefik.http.routers.frw-backend.tls.certresolver=letsencrypt\" \
               --label \"traefik.http.routers.frw-backend.middlewares=http-to-https@file\" \
-              --label \"traefik.http.services.frw-backend.loadbalancer.server.port=8000\" \
+              --label \"traefik.http.services.frw-backend.loadbalancer.server.port=8001\" \
               -e DB_CONNECTION=\"$DB_CONNECTION\" \
               -e SECRET_KEY=\"$SECRET_KEY\" \
               $IMAGE_NAME"
