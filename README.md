@@ -7,7 +7,7 @@
 [![made-for-VSCode](https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg)](https://code.visualstudio.com/)
 ![Python](https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8-blue)
 [![GitHub release](https://img.shields.io/github/release/jaisenbe58r/iaapi.svg)](https://GitHub.com/jaisenbe58r/iaapi/releases/)
-[![GitHub commits](https://img.shields.io/github/commits-since/jaisenbe58r/iaapi/v0.1.1.svg)](https://GitHub.com/jaisenbe58r/iaapi/commit/)
+[![GitHub commits](https://img.shields.io/github/commits-since/jaisenbe58r/iaapi/v0.0..svg)](https://GitHub.com/jaisenbe58r/iaapi/commit/)
 [![PyPI Latest Release](https://badge.fury.io/py/iaapi.svg)](https://pypi.org/project/iaapi/)
 [![Build status](https://ci.appveyor.com/api/projects/status/7vx20e0h5dxcyla2/branch/master?svg=true)](https://ci.appveyor.com/project/jaisenbe58r/iaapi/branch/master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2f5b0302acc04a3dac74d6815fdf66e5)](https://www.codacy.com/manual/jaisenbe58r/iaapi?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jaisenbe58r/iaapi&amp;utm_campaign=Badge_Grade)
