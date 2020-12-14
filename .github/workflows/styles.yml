@@ -37,4 +37,5 @@ jobs:
       - name: Run linters
         run: |
           source .venv/bin/activate
+          chmod +x ./scripts/lint
           ./scripts/lint
