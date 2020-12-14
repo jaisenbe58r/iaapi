@@ -50,5 +50,5 @@ jobs:
           source .venv/bin/activate
           chmod +x ./postman/run-api-tests.sh
           alembic upgrade head && uvicorn app.main:app &
-          APIURL=http://localhost:8000/api ./postman/run-api-tests.sh
+          APIURL=http://localhost:8000/api/v1 ./postman/run-api-tests.sh
           alembic downgrade base
