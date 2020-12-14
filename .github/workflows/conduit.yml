@@ -48,7 +48,7 @@ jobs:
           DB_CONNECTION: postgres://postgres:postgres@localhost/postgres
         run: |
           source .venv/bin/activate
-          chmod +x ./docker/entrypoint.sh
+          chmod +x .
           alembic upgrade head && uvicorn app.main:app &
           APIURL=http://localhost:8000/api ./postman/run-api-tests.sh
           alembic downgrade base
