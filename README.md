@@ -24,6 +24,7 @@
 
 
 
+referencias = https://github.com/nsidnev/fastapi-realworld-example-app
 
 # Quickstart
 
