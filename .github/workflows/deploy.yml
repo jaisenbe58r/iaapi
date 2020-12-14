@@ -44,7 +44,7 @@ jobs:
           chmod 700 ~/.ssh
           ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
             docker pull $IMAGE_NAME && \
-
+            (docker rm -f frw_backend || true) && \
             docker run -d \
               --name frw_backend \
               --network web \
