@@ -12,7 +12,7 @@ from app.core.logging import InterceptHandler
 API_PREFIX = "/api/v1"
 
 JWT_TOKEN_PREFIX = "Token"  # noqa: S105
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 
 config = Config(".env")
 
