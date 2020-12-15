@@ -46,7 +46,8 @@ jobs:
 
             cd /tmp/ && \
             echo $(pwd) && \
-            git clone https://github.com/jaisenbe58r/iaapi.git"
+            git clone https://github.com/jaisenbe58r/iaapi.git && \
+            ls -la"
             
         # && \
         # # (docker rm -f frw_backend || true) && \
