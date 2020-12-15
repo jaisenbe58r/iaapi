@@ -7,6 +7,7 @@ on:
 
 env:
   IMAGE_NAME: jaisenbe58r/iaapi
+  IMAGE_NAME_SERVICE: jaisenbe58r/iaapi-service
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
@@ -16,11 +17,13 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
-      - name: Build docker-compose images and publish to registry
+      - name: Build image and publish to registry
         run: |
-
+          docker build -t $IMAGE_NAME:latest .
+          docker-compose build --pull
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
-
+          docker push $IMAGE_NAME:latest
+          docker-xompose push 
 
   deploy:
     name: Deploy
@@ -43,17 +46,9 @@ jobs:
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
-
-            cd /tmp/ && \
-            echo $(pwd) && \
-            git clone https://github.com/jaisenbe58r/iaapi.git && \
-            ls -la"
-            
-        # && \
-        # # (docker rm -f frw_backend || true) && \
-        # docker-compose build . && \
-        # docker-compose up -d"
-
+            docker pull $IMAGE_NAME && \
+            (docker rm -f frw_backend || true) && \
+            docker
 
 
         # ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
