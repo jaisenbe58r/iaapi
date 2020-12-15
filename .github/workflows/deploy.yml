@@ -46,9 +46,7 @@ jobs:
           ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
             docker pull $IMAGE_NAME && \
 
-            docker-compose build . && \
-            docker-compose up -d"
-
+            docker-compose build . "
 
 
         # ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
