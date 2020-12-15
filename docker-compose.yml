@@ -19,7 +19,7 @@ services:
       - .env
     volumes:
       - ./dbdata:/var/lib/postgresql/data:cached
-  
+
   pgadmin:
     image: dpage/pgadmin4
     links:
