@@ -44,9 +44,9 @@ jobs:
           chmod 700 ~/.ssh
           ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
 
-            cd /var/www/iaapi && \
+            cd /tmp/ && \
             echo $(pwd) && \
-            git pull"
+            git clone https://github.com/jaisenbe58r/iaapi.git"
             
         # && \
         # # (docker rm -f frw_backend || true) && \
