@@ -18,9 +18,9 @@ jobs:
       - uses: actions/checkout@v1
       - name: Build docker-compose images and publish to registry
         run: |
-          docker build -t $IMAGE_NAME:latest .
+
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
-          docker push $IMAGE_NAME:latest
+
 
   deploy:
     name: Deploy
@@ -43,9 +43,9 @@ jobs:
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
-            docker pull $IMAGE_NAME && \
+
             cd /var/www/iaapi && \
-            echo $(pwd)  && \
+            echo $(pwd) && \
             git pull"
             
         # && \
