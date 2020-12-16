@@ -45,9 +45,13 @@ jobs:
           ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
             cd /var/www/iaapi && \
             git pull && \
-            docker-compose down && \
-            docker-compose build && \
-            docker-compose up -d"
+            (docker stack rm iaapi-services || true) && \
+            (docker swarm leave --force || true) && \
+            docker swarm init 10.19.0.6 && \
+            docker stack deploy -c docker-compose.yml iaapi-services && \
+            docker stack ls && \
+            docker service ls && \
+            docker container ls"
 
 
         # ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST "
