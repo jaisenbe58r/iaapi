@@ -10,6 +10,10 @@ services:
     depends_on:
       - db
     command: ['./docker/entrypoint.sh', "db:5432"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.build.rule=Host(`build.localhost`)"
+      - "traefik.http.routers.build.entrypoints=web"
 
   db:
     image: postgres:11.5-alpine
@@ -58,3 +62,17 @@ services:
     environment:
       - GF_USERS_ALLOW_SIGN_UP=false
 
+  traefik:
+    image: "traefik:v2.3"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
