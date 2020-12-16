@@ -4,17 +4,19 @@ services:
   app:
     build: .
     ports:
-      - "8000:8000"
+      - 8000:8000
     env_file:
       - .env
     depends_on:
       - db
     command: ['./docker/entrypoint.sh', "db:5432"]
+    deploy:
+      replicas: 1
 
   db:
     image: postgres:11.5-alpine
     ports:
-      - "5432:5432"
+      - 5432:5432
     env_file:
       - .env
     volumes:
@@ -32,7 +34,7 @@ services:
     # volumes:
     #   - pgadmin:/root/.pgadmin
     ports:
-      - "5050:80"
+      - 5050:80
 
   visualizer:
     image: dockersamples/visualizer
