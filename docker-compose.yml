@@ -13,6 +13,7 @@ services:
     deploy:
       replicas: 1
 
+
   db:
     image: postgres:11.5-alpine
     ports:
