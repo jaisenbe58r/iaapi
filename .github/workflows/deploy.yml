@@ -47,7 +47,7 @@ jobs:
             git pull && \
             (docker stack rm iaapi-services || true) && \
             (docker swarm leave --force || true) && \
-            docker swarm init 10.19.0.6 && \
+            docker swarm init --advertise-addr 10.19.0.6 && \
             docker stack deploy -c docker-compose.yml iaapi-services && \
             docker stack ls && \
             docker service ls && \
