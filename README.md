@@ -4,17 +4,16 @@
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
-[![made-for-VSCode](https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg)](https://code.visualstudio.com/)
+[![made-for-VSCode](https://img.shields.io/badge/Made%20for-Jaime%20Sendra-1f425f.svg)](https://jaimesendraberenguer.com.com/)
 ![Python](https://img.shields.io/badge/python-3.7%20%7C%203.8-blue)
 [![GitHub release](https://img.shields.io/github/release/jaisenbe58r/iaapi.svg)](https://GitHub.com/jaisenbe58r/iaapi/releases/)
 [![GitHub commits](https://img.shields.io/github/commits-since/jaisenbe58r/iaapi/v0.0..svg)](https://GitHub.com/jaisenbe58r/iaapi/commit/)
 [![Build status](https://ci.appveyor.com/api/projects/status/7vx20e0h5dxcyla2/branch/master?svg=true)](https://ci.appveyor.com/project/jaisenbe58r/iaapi/branch/master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2f5b0302acc04a3dac74d6815fdf66e5)](https://www.codacy.com/manual/jaisenbe58r/iaapi?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jaisenbe58r/iaapi&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/cab5f019654542af8179abde2a7ab19f)](https://www.codacy.com/gh/jaisenbe58r/iaapi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jaisenbe58r/iaapi&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/jaisenbe58r/iaapi/branch/master/graph/badge.svg)](https://codecov.io/gh/jaisenbe58r/iaapi)
 [![License](https://img.shields.io/badge/license-MIT-ORANGE.svg)](https://github.com/jaisenbe58r/iaapi/blob/master/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/jaisenbe58r/iaapi.svg)](https://GitHub.com/jaisenbe58r/iaapi/graphs/contributors/)
 [![GitHub issues](https://img.shields.io/github/issues/jaisenbe58r/iaapi.svg)](https://GitHub.com/jaisenbe58r/iaapi/issues/)
-[![Discuss](https://img.shields.io/badge/discuss-DISCORD-PURPLE.svg)](https://discord.gg/HUxahg)
 [![GitHubIssues](https://img.shields.io/badge/issue_tracking-github-violet.svg)](https://github.com/jaisenbe58r/iaapi/issues)
 
 
@@ -25,7 +24,7 @@ Proyecto base para la creación de una API basada en FastAPI. El proyecto es una
 
 ## Instalación y configuración de Docker
 
-A continuación procedemos a instalar y configurar Docker que nos permitirá desplegar nuestros servicios como microservicios en Docker:
+A continuación procedemos a instalar y configurar Docker en CentOS, que nos permitirá desplegar nuestros servicios como microservicios en Docker:
 
 ```cmd
 #### Docker installation ####
@@ -64,6 +63,9 @@ docker ps -a  #Containers
 #Stop Docker service
 sudo systemctl stop docker
 ```
+
+En el siguiente [enlace](https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es) se explica también como instalar y usar Docker en Ubuntu 18.04
+
 ## Clonar Repositorio del proyecto
 
 En primer lugar, clonamos el repositorio e instalamos todas las dependencias para crear y arrancar el entorno de trabajo basado en ``poetry``:
@@ -93,6 +95,15 @@ echo PROJECT_NAME=<your proyect name> >> .env
 Para ejecutar la aplicación en modo ``debug`` añade:
 ```
 echo DEBUG=True >> .env
+```
+
+Para el administrador de base de datos ``pgadmin`` utilizariamos:
+
+```
+touch .env-pgadmin
+
+echo PGADMIN_DEFAULT_EMAIL=<your email> >> .env-pgadmin
+echo PGADMIN_DEFAULT_PASSWORD=<your email password> >> .env-pgadmin
 ```
 
 ## Creción del servicio FastAPI como microservicio
@@ -176,11 +187,8 @@ services:
       - db
     depends_on:
       - db
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: pwdpwd
-    # volumes:
-    #   - pgadmin:/root/.pgadmin
+    env_file:
+      - .env-pgadmin
     ports:
       - 5050:80
 
@@ -353,4 +361,15 @@ $USE_LOCAL_DB_FOR_TEST=True pytest
 
 # CI/CD
 
-En nuestro caso, hemos generado 
+En nuestro caso, hemos generado un ``Pipeline`` de Integración continua y despliegue continuo, tanto para el desarrollo como para el despliege de la aplicación en Producción.
+
+Para la implementación de este ``workflow CI/CD`` utilizamos GitHub Actions. Esto nos permite automatizar, personalizar y ejecutar flujos de trabajo de desarrollo de software directamente en el repositorio del proyecto.
+
+Tendremos 4 tipos de ``workflow``:
+- **Styles:** Se desplegan los test de análisis de código estático con la herramienta ``Flake8``, con la que verificamos ``pep8, pyflakes and circular complexity``. Puede acceder a la documentación a partir del siguiente [enlace](https://buildmedia.readthedocs.org/media/pdf/flake8/latest/flake8.pdf).
+- **Tests**: Corresponde a la automatización de todos los tests del proyecto, tal y como se ha comentado en el apartado anterior.
+- **API spec:** Test de Integración del servicio de FastAPI. Se desplegan los test de integración implementados en el directorio ``./postman/``.
+- **Deploy:** Despliegue de la Aplicación en un servidor externo (en nuestro caso ``DigitalOcean``).  Este ``workflow`` se encarga de construir la imagen docker de nuestra API y posteriormente, crear un clúster de docker swarm en el servidor para desplegar todos los microservicios comentados en el proyecto.
+
+Este proyecto base o ``Template`` estàcontruido en base a la disposición de 2 ``branch``, una para el desarrollo ``development`` y otra ``master`` para el despliegue en producción. Por tanto, este ``Pipeline`` de CI/CD permitira realizar todos los test para cualquier ``push`` o ``pull_request`` de estas dos ``branch``. Pero en el caso de despliegue en producción ``Deploy``, sólo se ejecutaria a partir de un ``push`` del ``master``. Esto es muy básico y se podria mejorar, pero con esta solución, podemos trabajar haciendo CI/CD de manera simple y funcional.
+
