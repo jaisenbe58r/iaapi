@@ -24,7 +24,7 @@ Proyecto base para la creación de una API basada en FastAPI. El proyecto es una
 
 Se ha optado por una arquitectura basada en microservicios a partir de un clúster de docker swarm. Dicho clúster esta desplegado sobre un servidor ``Ubuntu 20.04`` en una maquina virtual deDigital Ocean. Uno de estos microservicios será la API que actuará como punto de acceso a la aplicación desde el exterior.
 
-![Portada](docs\images\Portada.png)
+![Portada](docs/images/Portada.png)
 
 Además se ha implementado un microservicio de base de datos ``postgres`` con su administrador ``pgadmin``, comunicada directamente con la API, con ello se crean la base de datos necesaria para gestionar todas las peticiones de la API sobre la db.
 
