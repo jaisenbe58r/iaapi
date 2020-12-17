@@ -9,13 +9,12 @@ from starlette.datastructures import CommaSeparatedStrings, Secret
 
 from app.core.logging import InterceptHandler
 
-
-config = Config(".env")
-
 API_PREFIX = "/api/v1"
 
-JWT_TOKEN_PREFIX: str = config("JWT_TOKEN_PREFIX", cast=str, default="Token")
-VERSION: str = config("VERSION", cast=str, default="0.0.0")
+JWT_TOKEN_PREFIX = "Token"  # noqa: S105
+VERSION = "0.0.1"
+
+config = Config(".env")
 
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 
