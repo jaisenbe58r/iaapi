@@ -5,7 +5,6 @@
 [![made-for-VSCode](https://img.shields.io/badge/Made%20for-Jaime%20Sendra-1f425f.svg)](https://jaimesendraberenguer.com.com/)
 ![Python](https://img.shields.io/badge/python-3.7%20%7C%203.8-blue)
 [![GitHub release](https://img.shields.io/github/release/jaisenbe58r/iaapi.svg)](https://GitHub.com/jaisenbe58r/iaapi/releases/)
-[![GitHub commits](https://img.shields.io/github/commits-since/jaisenbe58r/iaapi/v0.0..svg)](https://GitHub.com/jaisenbe58r/iaapi/commit/)
 [![Build status](https://ci.appveyor.com/api/projects/status/7vx20e0h5dxcyla2/branch/master?svg=true)](https://ci.appveyor.com/project/jaisenbe58r/iaapi/branch/master)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/cab5f019654542af8179abde2a7ab19f)](https://www.codacy.com/gh/jaisenbe58r/iaapi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jaisenbe58r/iaapi&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/jaisenbe58r/iaapi/branch/master/graph/badge.svg)](https://codecov.io/gh/jaisenbe58r/iaapi)
@@ -106,7 +105,7 @@ echo PGADMIN_DEFAULT_EMAIL=<your email> >> .env-pgadmin
 echo PGADMIN_DEFAULT_PASSWORD=<your email password> >> .env-pgadmin
 ```
 
-## Creción del servicio FastAPI como microservicio
+## Servicio FastAPI como microservicio
 
 El servicio ``FastAPI`` se crea a partir de un contenedor ``Docker`` y se desplega en el clúster de ``Docker Swarm`` dentro del entorno virtual de Producción. Este servicio es la API que recibe las peticiones ```HTTP``` de los clientes y se encarga de comunicarse directamente con la base de datos u otros microservicios disponibles y devolver el resultado al cliente.
 
@@ -238,7 +237,7 @@ docker container ls
 http://<public IP>:8000/docs
 ```
 
-## Chequear servivios activos
+## Chequear servicios activos
 
 Una vez desplegado el clúster con todos los microservicios vamos a chequear que dichos servicios estén activos. Para ello vamos a ejecutar lo siguiente:
 
@@ -318,7 +317,7 @@ app
 
 # Tests
 
-Los Test para este proyecto estan definidos en la carpeta ``test/``.
+Los Test para este proyecto están definidos en la carpeta ``test/``.
 
 Este proyecto usa [pytest](https://docs.pytest.org/) para definir las pruebas puesto que nos permite usar el ``asset`` para las excepciones.
 
