@@ -217,6 +217,7 @@ services:
       - GF_USERS_ALLOW_SIGN_UP=false
 ```
 
+
 Para poder desplegar el clúster de docker swarm vamos a ejecutar las siguientes lineas de comandos:
 
 ```
