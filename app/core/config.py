@@ -9,12 +9,13 @@ from starlette.datastructures import CommaSeparatedStrings, Secret
 
 from app.core.logging import InterceptHandler
 
-API_PREFIX = "/api/v1"
-
-JWT_TOKEN_PREFIX = "Token"  # noqa: S105
-VERSION = "0.0.2"
 
 config = Config(".env")
+
+API_PREFIX = "/api/v1"
+
+JWT_TOKEN_PREFIX: string = config("JWT_TOKEN_PREFIX", cast=str, default="Token")
+VERSION: string = config("VERSION", cast=str, default="0.0.0")
 
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 
@@ -24,7 +25,7 @@ MIN_CONNECTIONS_COUNT: int = config("MIN_CONNECTIONS_COUNT", cast=int, default=1
 
 SECRET_KEY: Secret = config("SECRET_KEY", cast=Secret)
 
-PROJECT_NAME: str = config("PROJECT_NAME", default="iAApi.es")
+PROJECT_NAME: str = config("PROJECT_NAME", default="API Template")
 ALLOWED_HOSTS: List[str] = config(
     "ALLOWED_HOSTS",
     cast=CommaSeparatedStrings,
