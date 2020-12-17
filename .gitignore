@@ -83,6 +83,7 @@ celerybeat-schedule
 
 # Environments
 .env
+.env-pgadmin
 .venv
 env/
 venv/
@@ -108,3 +109,4 @@ venv.bak/
 
 # Project
 dbdata
+
