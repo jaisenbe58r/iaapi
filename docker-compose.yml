@@ -11,7 +11,7 @@ services:
       - db
     command: ['./docker/entrypoint.sh', "db:5432"]
     deploy:
-      replicas: 1
+      replicas: 2
 
 
   db:
