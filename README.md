@@ -1,9 +1,6 @@
 ![Portada](./.github/assets/Portada111.png)
 
-
-
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
-
 [![made-for-VSCode](https://img.shields.io/badge/Made%20for-Jaime%20Sendra-1f425f.svg)](https://jaimesendraberenguer.com.com/)
 ![Python](https://img.shields.io/badge/python-3.7%20%7C%203.8-blue)
 [![GitHub release](https://img.shields.io/github/release/jaisenbe58r/iaapi.svg)](https://GitHub.com/jaisenbe58r/iaapi/releases/)
@@ -22,11 +19,11 @@ Proyecto base para la creación de una API basada en FastAPI. El proyecto es una
 
 ### Definición de la Arquitectura
 
-Se ha optado por una arquitectura basada en microservicios a partir de un clúster de docker swarm. Dicho clúster esta desplegado sobre un servidor ``Ubuntu 20.04`` en una maquina virtual deDigital Ocean. Uno de estos microservicios será la API que actuará como punto de acceso a la aplicación desde el exterior.
+Se ha optado por una arquitectura basada en microservicios a partir de un clúster de ``docker swarm``. Dicho clúster esta desplegado sobre un servidor ``Ubuntu 20.04`` en una máquina virtual de ``Digital Ocean``. Uno de estos microservicios será la API que actuará como punto de acceso a la aplicación desde el exterior:
 
 ![Portada](docs/images/Portada.png)
 
-Además se ha implementado un microservicio de base de datos ``postgres`` con su administrador ``pgadmin``, comunicada directamente con la API, con ello se crean la base de datos necesaria para gestionar todas las peticiones de la API sobre la db.
+Además se ha implementado un microservicio de base de datos ``postgres`` con su administrador ``pgadmin``, comunicada directamente con la API, con ello se crea la base de datos necesaria para gestionar todas las peticiones de la API sobre la db.
 
 También se ha añadido el microservicio ```visualizer``` que nos permitirá monitorizar los microservicios en ejecución dentro del clúster.
 
@@ -38,9 +35,10 @@ Con ello, estaremos desplegando en producción una API basada en microservicios 
 
 ## Instalación y configuración de Docker
 
-En el siguiente [enlace](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-es) se explica también como instalar y usar Docker en ``Ubuntu 20.04``
+En el siguiente [enlace](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-es) se explica también como instalar y usar Docker en ``Ubuntu 20.04``.
 
 A continuación se inicia y se hace un pequeño test para validar el correcto funcionamiento de ``Docker``:
+
 ```
 # Start Docker service
 sudo systemctl start docker
@@ -109,7 +107,7 @@ echo PGADMIN_DEFAULT_PASSWORD=<your email password> >> .env-pgadmin
 
 ## Creción del servicio FastAPI como microservicio
 
-El servicio FastAPI se crea a partir de un contenedor docker y se desplega en el clúster de docker swarm dentro del entorno virtual de Producción. Este servicio es la API que recibe las peticiones ```HTTP``` de los clientes y se encarga de comunicarse directamente con los microservicios servidores del modelo para realizar las predicciones y posteriormente devolver el resultado al cliente.
+El servicio ``FastAPI`` se crea a partir de un contenedor ``Docker`` y se desplega en el clúster de ``Docker Swarm`` dentro del entorno virtual de Producción. Este servicio es la API que recibe las peticiones ```HTTP``` de los clientes y se encarga de comunicarse directamente con la base de datos u otros microservicios disponibles y devolver el resultado al cliente.
 
 En primer lugar se crea el archivo ``Dockerfile`` en la raiz del proyecto tal que así:
 
@@ -148,7 +146,7 @@ docker build -t jaisenbe58r/iaapi:latest .
 echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
 docker push jaisenbe58r/iaapi:latest
 ```
-A continuación os dejo un [enlace](https://avbravo-2.gitbook.io/docker/chapter1/registrarse-en-docker-hub) de cómo crear vuestra propia cuenta en ```Docker Hub```
+A continuación os dejo un [enlace](https://avbravo-2.gitbook.io/docker/chapter1/registrarse-en-docker-hub) de cómo crear vuestra propia cuenta en ```Docker Hub```.
 
 ## Despliegue de servicios con Docker swarm
 
@@ -221,10 +219,10 @@ services:
 Para poder desplegar el clúster de docker swarm vamos a ejecutar las siguientes lineas de comandos:
 
 ```
-#Start docker service
+# Start docker service
 sudo systemctl start docker
 
-#Start Docker Swarm
+# Start Docker Swarm
 docker swarm init
 
 docker stack deploy -c compose-config-PROD.yml PROD-STACK
@@ -234,13 +232,13 @@ docker stack ls
 docker service ls
 docker container ls
 
-#Visualize servicew on web browser (don't forget open port 9001)
+# Visualize servicew on web browser (don't forget open port 9001)
 http://<public IP>:8000/docs
 ```
 
 ## Chequear servivios activos
 
-Una vez desplejado el clúster con todos los microservicios vamos a chequear que dichos servicios estén activos. Para ello vamos a ejecutar lo siguiente:
+Una vez desplegado el clúster con todos los microservicios vamos a chequear que dichos servicios estén activos. Para ello vamos a ejecutar lo siguiente:
 
 ```cmd
 docker stack ls
@@ -269,9 +267,9 @@ sudo systemctl stop docker
 
 ## Monitorización
 
-Como hemos comentado anteriormente, hemos desplegado el microservicio de grafana y prometheus que nos permiten almacenar y visualizar las metricas del cluster en funcionamiento que previamente configuremos.
+Como hemos comentado anteriormente, hemos desplegado el microservicio de ``grafana`` y ``prometheus`` que nos permiten almacenar y visualizar las métricas del clúster en funcionamiento que previamente configuremos.
 
-Para acceder 
+Para acceder a este microservicio:
 
 ```
 #### Monitoring ####
@@ -287,16 +285,14 @@ Para acceder
 
 # Grafana dashboards to import
 https://grafana.com/grafana/dashboards?dataSource=prometheus
-
 ```
 
 # Documentación de la API
 
-La rutas de acceso a la documentación de la API son ``/docs`` or ``/redoc``, generadas con Swagger o ReDoc.
+La rutas de acceso a la documentación de la API son ``/docs`` or ``/redoc``, generadas con ``Swagger`` o ``ReDoc``.
 
 
 # Estructura del Proyecto
-
 
 Los archivos relacionados con la aplicación estan en los directorios ``app`` o ``tests``:
 
@@ -317,7 +313,6 @@ app
 ├── services         - logic that is not just crud related.
 └── main.py          - FastAPI application creation and configuration.
 ```
-
 
 # Tests
 
@@ -353,9 +348,8 @@ tests/test_services/test_jwt.py .....                                           
 $
 ```
 
-This project does not use your local ``PostgreSQL`` by default, but creates it in ``docker`` as a container (you can see it if you type ``docker ps`` when the tests are executed, the docker container for ``PostgreSQL`` should be launched with with a name like ``test-postgres-725b4bd4-04f5-4c59-9870-af747d3b182f``). But there are cases when you don't want to use ``docker`` for tests as a database provider (which takes an additional +- 5-10 seconds for its bootstrap before executing the tests), for example, in CI, or if you have problems with the ``docker`` driver or for any other reason. In this case, you can run the tests using your already running database with the following command:
-
 Este proyecto no usa su `` PostgreSQL`` local por defecto, sino que lo crea en ``docker`` como un contenedor (puede verlo si escribe ``docker ps`` cuando se ejecutan las pruebas). Pero hay casos en los que no desea utilizar ``docker`` para las pruebas como proveedor de base de datos (lo que tarda +/- 5-10 segundos adicionales para su arranque antes de ejecutar las pruebas), puede ejecutar las pruebas utilizando su base de datos en local con el siguiente comando:
+
 ```
 $USE_LOCAL_DB_FOR_TEST=True pytest
 ```
@@ -364,13 +358,46 @@ $USE_LOCAL_DB_FOR_TEST=True pytest
 
 En nuestro caso, hemos generado un ``Pipeline`` de Integración continua y despliegue continuo, tanto para el desarrollo como para el despliege de la aplicación en Producción.
 
-Para la implementación de este ``workflow CI/CD`` utilizamos GitHub Actions. Esto nos permite automatizar, personalizar y ejecutar flujos de trabajo de desarrollo de software directamente en el repositorio del proyecto.
+Para la implementación de este ``workflow CI/CD`` utilizamos [GitHub Actions](https://github.com/features/actions). Esto nos permite automatizar, personalizar y ejecutar flujos de trabajo de desarrollo de software directamente en el repositorio del proyecto.
 
-Tendremos 4 tipos de ``workflow``:
-- **Styles:** Se desplegan los test de análisis de código estático con la herramienta ``Flake8``, con la que verificamos ``pep8, pyflakes and circular complexity``. Puede acceder a la documentación a partir del siguiente [enlace](https://buildmedia.readthedocs.org/media/pdf/flake8/latest/flake8.pdf).
-- **Tests**: Corresponde a la automatización de todos los tests del proyecto, tal y como se ha comentado en el apartado anterior.
+Tendremos 4 tipos de ``workflows``:
+
+- **Styles:** Se desplegan los test de análisis de código estático con la herramienta ``Flake8``, con la que verificamos ``pep8, pyflakes and circular complexity``. Puede acceder a la documentación a partir del siguiente [enlace](https://buildmedia.readthedocs.org/media/pdf/flake8/latest/flake8.pdf). Puede utilizar a la herramienta [codacy](https://app.codacy.com/gh/jaisenbe58r/iaapi/dashboard?utm_source=github.com&utm_medium=referral&utm_content=jaisenbe58r/iaapi&utm_campaign=Badge_Grade) para chequear la calidad de código para el proyecto.
+
+- **Tests**: Corresponde a la automatización de todos los tests del proyecto, tal y como se ha comentado en el apartado anterior. Puede acceder a la herramienta [codecov](https://codecov.io/gh/jaisenbe58r/iaapi), para monitorizar la covertura de test a su código.
+
 - **API spec:** Test de Integración del servicio de FastAPI. Se desplegan los test de integración implementados en el directorio ``./postman/``.
+
 - **Deploy:** Despliegue de la Aplicación en un servidor externo (en nuestro caso ``DigitalOcean``).  Este ``workflow`` se encarga de construir la imagen docker de nuestra API y posteriormente, crear un clúster de docker swarm en el servidor para desplegar todos los microservicios comentados en el proyecto.
+
+Tanto para conseguir subir la imagen docker a ``Docker Hub`` como para la conexión ``ssh`` con el servidor, vamos a necesitar crear nuestros ``secrets`` en ``GitHub``. Para ello puede consultar el siguiente [enlace](https://docs.github.com/es/free-pro-team@latest/actions/reference/encrypted-secrets).
+
+```
+- DOCKER_USER: secrets.DOCKER_USER 
+- DOCKER_PASSWORD: secrets.DOCKER_PASSWORD
+- SSH_USER: secrets.SSH_USER
+- SSH_HOST: secrets.SSH_HOST
+- SSH_PRIVATE_KEY: secrets.SSH_PRIVATE_KEY
+- DB_CONNECTION: secrets.DB_CONNECTION
+- SECRET_KEY: secrets.SECRET_KEY
+```
 
 Este proyecto base o ``Template`` estàcontruido en base a la disposición de dos ``branch``, una para el desarrollo ``development`` y otra ``master`` para el despliegue en producción. Por tanto, este ``Pipeline`` de CI/CD permitirá realizar todos los test para cualquier ``push`` o ``pull_request`` de estas dos ``branch``. Pero en el caso de despliegue en producción ``Deploy``, sólo se ejecutaria a partir de un ``push`` del ``master``. Esto es muy básico y se podria mejorar, pero con esta solución, podemos trabajar haciendo CI/CD de manera simple y funcional.
 
+# Contacto
+
+Búscame en cualquiera de las siguientes plataformas:
+
+- **Website:** [jaimesendraberenguer.com](https://www.jaimesendraberenguer.com/)
+
+- **LinkedIn**: [jaisenbe](www.linkedin.com/in/jaisenbe)
+
+- **Twitter**: [@jaime_rafel](https://twitter.com/jaime_rafel)
+
+- **GitHub**: [jaisenbe58r](https://github.com/jaisenbe58r)
+
+- **Medium**: [@jaimesendraberenguer](https://jaimesendraberenguer.medium.com/)
+
+- **Email**: jaimesendraberenguer@gmail.com
+
+Valencia, España
