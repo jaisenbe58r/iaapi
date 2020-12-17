@@ -60,13 +60,3 @@ services:
       - prometheus:prometheus
     environment:
       - GF_USERS_ALLOW_SIGN_UP=false
-
-  logspout:
-    image: gliderlabs/logspout:latest
-    volumes:
-      - /etc/hostname:/etc/host_hostname:ro
-      - /var/run/docker.sock:/var/run/docker.sock
-    command:
-      syslog://svt2-logger.am2.cloudra.local:514
-    deploy:
-      mode: global
