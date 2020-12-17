@@ -2,24 +2,27 @@ version: '3'
 
 services:
   app:
-    build: .
+    image: jaisenbe58r/iaapi:latest
     ports:
-      - "8000:8000"
+      - 8000:8000
     env_file:
       - .env
     depends_on:
       - db
     command: ['./docker/entrypoint.sh', "db:5432"]
-  
+    deploy:
+      replicas: 1
+
+
   db:
     image: postgres:11.5-alpine
     ports:
-      - "5432:5432"
+      - 5432:5432
     env_file:
       - .env
     volumes:
       - ./dbdata:/var/lib/postgresql/data:cached
-  
+
   pgadmin:
     image: dpage/pgadmin4
     links:
@@ -32,4 +35,28 @@ services:
     # volumes:
     #   - pgadmin:/root/.pgadmin
     ports:
-      - "5050:80"
+      - 5050:80
+
+  visualizer:
+    image: dockersamples/visualizer
+    ports:
+      - 9001:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9002:9090
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 9003:3000
+    links:
+      - prometheus:prometheus
+    environment:
+      - GF_USERS_ALLOW_SIGN_UP=false
