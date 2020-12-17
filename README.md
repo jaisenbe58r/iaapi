@@ -14,6 +14,7 @@
 [![GitHubIssues](https://img.shields.io/badge/issue_tracking-github-violet.svg)](https://github.com/jaisenbe58r/iaapi/issues)
 
 
+
 # iAApi
 Proyecto base para la creación de una API basada en FastAPI. El proyecto es una adaptación del template proporcionado por ```nsidnev``` en su repositorio de Github: [GitHub | nsidnev](https://github.com/nsidnev/fastapi-realworld-example-app)
 
