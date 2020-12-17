@@ -226,7 +226,7 @@ sudo systemctl start docker
 # Start Docker Swarm
 docker swarm init
 
-docker stack deploy -c compose-config-PROD.yml PROD-STACK
+docker stack deploy -c compose-compose.yml PROD-STACK
 
 # Check services/containers
 docker stack ls
