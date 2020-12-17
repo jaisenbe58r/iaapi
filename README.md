@@ -1,4 +1,10 @@
-![Portada](./.github/assets/Portada111.png)
+<div align="center">
+  <img src=./.github/assets/Portada111.png><br>
+</div>
+
+-----------------
+
+## iAApi: Proyecto base para la creación de una API basada en FastAPI.
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
@@ -12,8 +18,6 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/jaisenbe58r/iaapi.svg)](https://GitHub.com/jaisenbe58r/iaapi/graphs/contributors/)
 [![GitHub issues](https://img.shields.io/github/issues/jaisenbe58r/iaapi.svg)](https://GitHub.com/jaisenbe58r/iaapi/issues/)
 [![GitHubIssues](https://img.shields.io/badge/issue_tracking-github-violet.svg)](https://github.com/jaisenbe58r/iaapi/issues)
-
-
 
 # iAApi
 Proyecto base para la creación de una API basada en FastAPI. El proyecto es una adaptación del template proporcionado por ```nsidnev``` en su repositorio de Github: [GitHub | nsidnev](https://github.com/nsidnev/fastapi-realworld-example-app)
@@ -40,7 +44,7 @@ En el siguiente [enlace](https://www.digitalocean.com/community/tutorials/how-to
 
 A continuación se inicia y se hace un pequeño test para validar el correcto funcionamiento de ``Docker``:
 
-```
+```sh
 # Start Docker service
 sudo systemctl start docker
 
@@ -70,7 +74,7 @@ sudo systemctl stop docker
 
 En primer lugar, clonamos el repositorio e instalamos todas las dependencias para crear y arrancar el entorno de trabajo, para ello utilizaremos ``poetry``:
 
-```
+```sh
 git clone https://github.com/jaisenbe58r/iaapi
 cd iaapi/
 poetry install
@@ -81,7 +85,7 @@ poetry shell
 
 Posteriormente creamos el archivo ``.env`` y añadimos las siguientes variables de entorno:
 
-```
+```sh
 export POSTGRES_DB=rwdb POSTGRES_PORT=5432 POSTGRES_USER=postgres POSTGRES_PASSWORD=postgres
 
 touch .env
@@ -93,13 +97,13 @@ echo PROJECT_NAME=<your proyect name> >> .env
 ```
 
 Para ejecutar la aplicación en modo ``debug`` añade:
-```
+```sh
 echo DEBUG=True >> .env
 ```
 
 Para el administrador de base de datos ``pgadmin`` utilizariamos:
 
-```
+```sh
 touch .env-pgadmin
 
 echo PGADMIN_DEFAULT_EMAIL=<your email> >> .env-pgadmin
@@ -142,7 +146,7 @@ CMD alembic upgrade head && \
 
 Para crear este servicio Fast API a partir del ``Dockerfile`` y subirlo a nuestra cuenta particular de ```Docker Hub``` procedemos de la siguiente manera:
 
-```
+```sh
 docker build -t jaisenbe58r/iaapi:latest .
 echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
 docker push jaisenbe58r/iaapi:latest
@@ -220,7 +224,7 @@ services:
 
 Para poder desplegar el clúster de docker swarm vamos a ejecutar las siguientes lineas de comandos:
 
-```
+```sh
 # Start docker service
 sudo systemctl start docker
 
@@ -242,7 +246,7 @@ http://<public IP>:8000/docs
 
 Una vez desplegado el clúster con todos los microservicios vamos a chequear que dichos servicios estén activos. Para ello vamos a ejecutar lo siguiente:
 
-```cmd
+```sh
 docker stack ls
 docker service ls
 docker container ls
@@ -255,7 +259,7 @@ http://```<public IP>```:9001/
 
 Para eliminar el clúster de docker swarm ejecuta lo siguiente:
 
-```cmd
+```sh
 # Remove stack
 docker stack rm PROD-STACK
 
@@ -352,7 +356,7 @@ $
 
 Este proyecto no usa su `` PostgreSQL`` local por defecto, sino que lo crea en ``docker`` como un contenedor (puede verlo si escribe ``docker ps`` cuando se ejecutan las pruebas). Pero hay casos en los que no desea utilizar ``docker`` para las pruebas como proveedor de base de datos (lo que tarda +/- 5-10 segundos adicionales para su arranque antes de ejecutar las pruebas), puede ejecutar las pruebas utilizando su base de datos en local con el siguiente comando:
 
-```
+```sh
 $USE_LOCAL_DB_FOR_TEST=True pytest
 ```
 
