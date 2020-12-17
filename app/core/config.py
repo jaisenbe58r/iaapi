@@ -14,7 +14,7 @@ config = Config(".env")
 
 API_PREFIX = "/api/v1"
 
-JWT_TOKEN_PREFIX: string = config("JWT_TOKEN_PREFIX", cast=str, default="Token")
+JWT_TOKEN_PREFIX: str = config("JWT_TOKEN_PREFIX", cast=str, default="Token")
 VERSION: str = config("VERSION", cast=str, default="0.0.0")
 
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
